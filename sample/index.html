@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Virtual AI Teacher</title>
+
+<meta name="description" content="Virtual AI Teacher for KCSE students">
+<meta name="author" content="Adams Victor">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<link rel="icon" href="icon-192.png">
+
+</head>
+
+<body>
+
+<!-- ORB -->
+<div id="orb" class="idle"></div>
+
+<header>
+
+<div class="header-left">
+<h1>📘 Virtual AI Teacher</h1>
+<div id="adams">Adams</div>
+</div>
+
+<div class="header-right">
+<button id="teachBtn" class="modeBtn active">Teach</button>
+<button id="examBtn" class="modeBtn">📝 Exam</button>
+<button id="jarBtn" class="modeBtn">JAR</button>
+</div>
+
+</header>
+
+<main id="chat">
+
+<div class="message teacher">
+Hello 👋 What do you want to learn today?
+</div>
+
+</main>
+
+<footer id="inputArea">
+
+<button id="micBtn">🎤</button>
+
+<input
+id="userInput"
+type="text"
+placeholder="Ask query..."
+autocomplete="off"
+>
+
+<button id="sendBtn">➤</button>
+
+<button id="musicBtn">🎵</button>
+
+<button id="menuBtn">⋮</button>
+
+</footer>
+
+<div id="menuPanel">
+<button id="voiceToggleBtn">🔊 Voice</button>
+<button id="pomodoroBtn">⏳ Pomodoro</button>
+</div>
+
+<div id="pomodoroPanel">
+
+<h3>Pomodoro</h3>
+<div id="pomodoroTimer">25:00</div>
+
+<button id="startPomodoro">Start</button>
+<button id="resetPomodoro">Reset</button>
+
+</div>
+
+<button id="notesToggle">📚</button>
+
+<div id="knowledgeBox">
+
+<h2>KCSE Notes</h2>
+
+<textarea
+id="knowledgeInput"
+placeholder="Write notes here...">
+</textarea>
+
+<button id="saveKnowledgeBtn">Save Notes</button>
+<button id="deleteKnowledgeBtn">Delete Notes</button>
+
+</div>
+
+<audio id="bgMusic" preload="auto"></audio>
+
+<script src="script.js" defer></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("service-worker.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.log("Service Worker Failed:", err));
+  });
+}
+</script>
+
+</body>
+</html>

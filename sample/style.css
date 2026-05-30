@@ -1,0 +1,330 @@
+/* RESET & BODY */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: #000;
+  font-family: Arial, sans-serif;
+  color: white;
+  overflow: hidden;
+}
+
+/* ================= ORB ================= */
+#orb {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4fd1ff, #002b3a);
+  filter: blur(10px);
+  opacity: 0.35;
+  animation: pulse 8s infinite ease-in-out;
+  z-index: 0;
+  pointer-events: none;
+  box-shadow:
+    0 0 40px rgba(79, 209, 255, 0.6),
+    0 0 80px rgba(79, 209, 255, 0.3) inset;
+  transition: all 0.3s ease;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* Orb states */
+#orb.idle { background: radial-gradient(circle, #4fd1ff, #002b3a); }
+#orb.listening { background: radial-gradient(circle, #ef476f, #f94144); opacity:0.9; filter: blur(6px); animation: pulse 1.5s infinite ease-in-out; }
+#orb.thinking { background: radial-gradient(circle, #ffd166, #ff9f1c); opacity:0.85; filter: blur(6px); animation: pulse 3s infinite ease-in-out; }
+#orb.answering { background: radial-gradient(circle, #06d6a0, #118ab2); opacity:0.85; filter: blur(6px); animation: pulse 4s infinite ease-in-out; }
+#orb.speaking { background: radial-gradient(circle, #8338ec, #3a0ca3); opacity:0.9; filter: blur(6px); animation: pulse 2s infinite ease-in-out; }
+#orb.error { background: radial-gradient(circle, #ff0000, #8b0000); opacity:0.95; filter: blur(3px); animation: none; }
+
+/* ================= HEADER ================= */
+header {
+  position: relative;
+  z-index: 20;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.85);
+  box-shadow: 0 0 30px rgba(79,209,255,0.4);
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: radial-gradient(circle, rgba(79,209,255,0.6) 0%, transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#adams {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #4fd1ff;
+  text-shadow: 0 0 10px #4fd1ff;
+  user-select: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ================= MODE BUTTONS ================= */
+.modeBtn {
+  background: #4fd1ff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.modeBtn:hover {
+  box-shadow: 0 0 12px #4fd1ff;
+  transform: translateY(-2px);
+}
+
+.modeBtn.active {
+  background: #ff9f1c;
+  color: white;
+  box-shadow: 0 0 15px #ff9f1c;
+}
+
+/* ================= CHAT ================= */
+#chat {
+  position: relative;
+  z-index: 15;
+  height: calc(100vh - 150px);
+  padding: 15px 20px 120px 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 20px;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideIn 0.3s forwards;
+}
+
+.user {
+  align-self: flex-end;
+  background: #1a3cff;
+}
+
+.teacher {
+  align-self: flex-start;
+  background: #1a1a1a;
+  border-left: 4px solid #4fd1ff;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= INPUT AREA ================= */
+#inputArea {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 25;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  gap: 10px;
+  padding: 12px 20px;
+  align-items: center;
+}
+
+#userInput {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: white;
+  background: #111;
+}
+
+#userInput:focus {
+  outline: 2px solid #4fd1ff;
+}
+
+#sendBtn,
+#micBtn,
+#musicBtn,
+#menuBtn {
+  background: #4fd1ff;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+#sendBtn:hover,
+#micBtn:hover,
+#musicBtn:hover,
+#menuBtn:hover {
+  box-shadow: 0 0 15px #4fd1ff;
+  transform: scale(1.1);
+}
+
+/* ================= THREE DOT MENU ================= */
+#menuPanel {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: #0f162e;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 0 20px rgba(79,209,255,0.4);
+  z-index: 30;
+}
+
+#menuPanel.show { display: flex; }
+
+#menuPanel button {
+  background: #4fd1ff;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: black;
+}
+
+/* ================= POMODORO ================= */
+#pomodoroPanel {
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  width: 180px;
+  background: #0f162e;
+  padding: 15px;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 25px rgba(79,209,255,0.4);
+  z-index: 25;
+}
+
+#pomodoroPanel.show { display: flex; }
+
+#pomodoroTimer {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4fd1ff;
+  text-shadow: 0 0 10px #4fd1ff;
+}
+
+/* ================= NOTES ================= */
+#notesToggle {
+  position: fixed;
+  bottom: 90px;
+  left: 20px;
+  font-size: 26px;
+  border: none;
+  background: #4fd1ff;
+  color: black;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 0 15px #4fd1ff;
+  transition: transform 0.2s ease;
+}
+
+#notesToggle:hover {
+  transform: scale(1.1);
+}
+
+#knowledgeBox {
+  position: fixed;
+  bottom: 150px;
+  left: 20px;
+  width: 320px;
+  background: #0f162e;
+  padding: 15px;
+  border-radius: 12px;
+  display: none;
+  z-index: 20;
+  box-shadow: 0 0 20px rgba(79,209,255,0.3);
+  flex-direction: column;
+}
+
+#knowledgeBox.show { display: flex; }
+
+#knowledgeBox textarea {
+  width: 100%;
+  height: 150px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid #4fd1ff;
+  background: #111;
+  color: white;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+/* MOBILE FIX */
+@media (max-width:600px){
+
+#orb{
+width:260px;
+height:260px;
+}
+
+#chat{
+padding-bottom:140px;
+}
+
+#knowledgeBox{
+width:90%;
+left:5%;
+}
+
+}
